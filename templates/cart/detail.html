@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load tags %} }
+
+
+{% block title %}
+    <title>Ваша корзина</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="row">
+            {% show_category request %}
+            <div class="col-lg-9" style="margin-top:56px">
+                {% if cart.get_total_price != 0 %}
+                    {% include 'cart/table.html' %}
+                {% else %}
+                    <p>Ваша корзина пуста</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

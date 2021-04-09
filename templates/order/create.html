@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load tags %}
+{% block content %}
+
+
+    <div class="container" style="padding-top:25px;">
+        <main>
+
+
+            <div class="row g-6">
+
+                <div class="col-md-5 col-lg-4 order-md-last">
+
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-primary">Ваша корзина</span>
+                    </h4>
+
+                    <ul class="list-group mb-3">
+                        {% for item in cart %}
+                            <li class="list-group-item d-flex justify-content-between lh-sm">
+                                <div>
+                                    <h6 class="my-0">{{ item.product.name }}</h6>
+                                    <small class="text-muted">x{{ item.quantity }}</small>
+                                </div>
+                                <span class="text-muted">${{ item.price }}</span>
+                            </li>
+                        {% endfor %}
+
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Итого (USD)</span>
+                            <strong>${{ cart.get_total_price }}</strong>
+                        </li>
+                    </ul>
+
+
+                </div>
+
+                <div class="col-md-7 col-lg-8">
+                    <h4 class="mb-3">Billing address</h4>
+                    <form class="needs-validation was-validated"
+                          action="{% url 'orders:order_create' %}"
+                          method="post">
+
+
+                        <div class="row g-3">
+                            {% for field in form %}
+                                <div class="col-sm-6">
+                                    {{ field.label }}
+                                    {{ field }}
+                                    {% if errors %}
+                                        {{ field.errors }}
+                                    {% endif %}
+
+
+                                </div>
+
+
+                            {% endfor %}
+                        </div>
+                        <div class="invalid-feedback">
+
+                        </div>
+
+                        <hr class="my-4">
+                        {% csrf_token %}
+                        <button class="w-100 btn btn-primary btn-lg"
+                                type="submit">Оплатить
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+{% endblock %}

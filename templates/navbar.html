@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}">Start Bootstrap</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                {% if request.user.is_authenticated %}
+                    <li class="nav-link active">
+                        Здравствуйте, {{ request.user.username }}
+                    </li>
+                    {% if request.user.role != 'user' %}
+                        <li class="nav-item active">
+                            <a class="nav-link"
+                               href="{% url 'create_product' %}">
+                                Добавить товар</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'password_change' %}">
+                            Изменить пароль</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'register:login' %}">Войти</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link"
+                           href="{% url 'register:registration' %}">Регистрация</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'cart:cart_detail' %}">Корзина
+                        <span class="badge badge-pill badge-danger">{{ cart|length }}</span></a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>

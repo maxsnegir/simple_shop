@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load tags %}
+
+{% block content %}
+
+    <div class="container">
+
+        <div class="row">
+
+            {% show_category request %}
+            <div class="col-lg-9" style="margin-top:56px">
+                {% block carousel %}
+                    {% include 'carousel.html' %}
+                {% endblock %}
+
+
+                <div class="row">
+                    {% for product in products %}
+                        {% include 'products/product.html' %}
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'paginator.html' %}
+{% endblock %}
