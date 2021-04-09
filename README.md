@@ -17,7 +17,7 @@
 - Python 3.8
 - Django 3.0.5
 
-####В будущем
+#### В будущем
 - djangorestframework 3.11.0
 - Postgres 12
 - Docker
