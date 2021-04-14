@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.views import generic
 
 from cart.forms import CartAddProductForm
+from comments.forms import CommentForm
 from .forms import CreateProduct
 from .models import *
 
@@ -33,6 +34,8 @@ class ProductDetail(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cart_product_form'] = CartAddProductForm()
+        context['comments'] = self.get_object().comments.all()
+        context['form'] = CommentForm()
         return context
 
 
@@ -56,7 +59,7 @@ class ProductsByBrand(ProductByCategory):
     def get_queryset(self):
         return Product.objects.filter(
             brand__slug=self.kwargs['brand_slug']).select_related(
-            'subcategory__category',).all()
+            'subcategory__category', ).all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

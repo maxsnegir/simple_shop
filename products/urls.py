@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .views import *
 
 urlpatterns = [
@@ -13,6 +13,7 @@ urlpatterns = [
     path('<slug:category_slug>/<slug:subcategory_slug>/<int:product_id>/',
          ProductDetail.as_view(),
          name='product_detail'),
-
+    path('<slug:category_slug>/<slug:subcategory_slug>/<int:product_id>/',
+         include('comments.urls'),),
 
 ]

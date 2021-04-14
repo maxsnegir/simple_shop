@@ -1,0 +1,25 @@
+{% load crispy_forms_tags %}
+<div class="card card-outline-secondary my-4">
+    <div class="card-header">
+        Отзывы
+    </div>
+
+    <div class="card-body">
+        <form action="{% url 'add_comment' product.subcategory.category.slug product.subcategory.slug product.id %}"
+              method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-success">Оставить
+                комментарий
+            </button>
+
+        </form>
+        {% for comment in comments %}
+
+            <p>{{ comment.text }}</p>
+            <small class="text-muted">Комментарий
+                от {{ comment.author.username }} {{ comment.created|date:"M d, Y" }}</small>
+            <hr>
+        {% endfor %}
+    </div>
+</div>

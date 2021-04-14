@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
     'register.apps.RegisterConfig',
+    'comments.apps.CommentsConfig',
 
 ]
 
