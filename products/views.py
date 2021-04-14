@@ -34,7 +34,8 @@ class ProductDetail(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cart_product_form'] = CartAddProductForm()
-        context['comments'] = self.get_object().comments.all()
+        context['comments'] = self.get_object().comments.select_related(
+            'author').all()
         context['form'] = CommentForm()
         return context
 

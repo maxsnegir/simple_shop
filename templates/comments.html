@@ -16,9 +16,11 @@
         </form>
         {% for comment in comments %}
 
-            <p>{{ comment.text }}</p>
+            <p>{{ comment.text| linebreaksbr }}</p>
             <small class="text-muted">Комментарий
-                от {{ comment.author.username }} {{ comment.created|date:"M d, Y" }}</small>
+                от {{ comment.author.username }} {{ comment.created|date:"M d, Y" }}
+                <a href="{% url 'delete_comment' product.subcategory.category.slug product.subcategory.slug product.id comment.id %}">
+                    Удалить</a></small>
             <hr>
         {% endfor %}
     </div>
