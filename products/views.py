@@ -10,7 +10,7 @@ class Index(generic.ListView):
     model = Product
     template_name = 'products/products_list.html'
     context_object_name = 'products'
-    paginate_by = 15
+    paginate_by = 12
 
     def get_queryset(self):
         return Product.objects.select_related('subcategory__category', ).all()
@@ -38,14 +38,31 @@ class ProductDetail(generic.DetailView):
 
 class ProductByCategory(generic.ListView):
     model = Product
-    template_name = 'products/product_by_category.html'
+    template_name = 'products/products_list.html'
     context_object_name = 'products'
+    paginate_by = 12
 
     def get_queryset(self):
         category = get_object_or_404(Category,
                                      slug=self.kwargs['category_slug'])
-        return Product.objects.select_related('subcategory__category', ).filter(
+        return Product.objects.select_related(
+            'subcategory__category', ).filter(
             subcategory__category__slug=category.slug).all()
+
+
+class ProductsByBrand(ProductByCategory):
+    template_name = 'products/products_by_brand.html'
+
+    def get_queryset(self):
+        return Product.objects.filter(
+            brand__slug=self.kwargs['brand_slug']).select_related(
+            'subcategory__category',).all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        brand = get_object_or_404(Brand, slug=self.kwargs['brand_slug'])
+        context['brand'] = brand
+        return context
 
 
 class CreateProductView(generic.CreateView):

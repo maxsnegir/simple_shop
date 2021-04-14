@@ -1,0 +1,31 @@
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button"
+            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+        Категории
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        {% for category in categories %}
+            <a class="dropdown-item" href="{{ category.get_absolute_url }}">
+                {{ category.name }}</a>
+        {% endfor %}
+    </div>
+
+
+</div>
+
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button"
+            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+        Брэнды
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        {% for brand in brands %}
+            <a class="dropdown-item" href="{{ brand.get_absolute_url }}">
+                {{ brand.name }}</a>
+        {% endfor %}
+    </div>
+
+
+</div>

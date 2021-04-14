@@ -27,7 +27,7 @@ class ProductModelTest(TestCase):
 
     def test_verbose_name(self):
         """
-        Проверка коректности полей verbose_name в модели
+        Проверка коректности полей verbose_name в модели Product
         """
         product = self.product
         verbose_fields = {
@@ -48,6 +48,6 @@ class ProductModelTest(TestCase):
                                  expected)
 
     def test_str_method(self):
-        """Тест метода __str__"""
+        """Тест метода __str__ в модели Product"""
         product = self.product
         self.assertEqual(product.__str__(), product.name)

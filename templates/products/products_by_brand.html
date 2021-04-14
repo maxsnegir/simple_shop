@@ -1,0 +1,10 @@
+{% extends 'products/products_list.html' %}
+
+{% block brand %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Товары {{ brand.name }}</h5>
+            {{ brand.description }}
+        </div>
+    </div>
+{% endblock %}

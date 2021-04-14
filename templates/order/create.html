@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load tags %}
+{% load crispy_forms_tags %}
 {% block content %}
 
 
@@ -37,29 +37,9 @@
 
                 <div class="col-md-7 col-lg-8">
                     <h4 class="mb-3">Billing address</h4>
-                    <form class="needs-validation was-validated"
-                          action="{% url 'orders:order_create' %}"
+                    <form action="{% url 'orders:order_create' %}"
                           method="post">
-
-
-                        <div class="row g-3">
-                            {% for field in form %}
-                                <div class="col-sm-6">
-                                    {{ field.label }}
-                                    {{ field }}
-                                    {% if errors %}
-                                        {{ field.errors }}
-                                    {% endif %}
-
-
-                                </div>
-
-
-                            {% endfor %}
-                        </div>
-                        <div class="invalid-feedback">
-
-                        </div>
+                        {{ form|crispy }}
 
                         <hr class="my-4">
                         {% csrf_token %}

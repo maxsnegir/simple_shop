@@ -4,14 +4,12 @@
 {% block content %}
 
     <div class="container">
+        {% block brand %}
 
+        {% endblock %}
         <div class="row">
 
-            {% show_category request %}
-            <div class="col-lg-9" style="margin-top:56px">
-                {% block carousel %}
-                    {% include 'carousel.html' %}
-                {% endblock %}
+            <div class="col-lg-" style="margin-top:56px">
 
 
                 <div class="row">
@@ -24,4 +22,5 @@
         </div>
     </div>
     {% include 'paginator.html' %}
+
 {% endblock %}

@@ -1,11 +1,12 @@
 from django.conf import settings
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
-from register.form import RegisterForm, LoginForm
+from register.forms import RegisterForm, LoginForm
 
 
 class Logout(LogoutView):
@@ -13,7 +14,7 @@ class Logout(LogoutView):
 
 
 class Login(LoginView):
-    form_class = LoginForm
+    form_class = AuthenticationForm
 
     def get_success_url(self):
         return reverse_lazy('index')

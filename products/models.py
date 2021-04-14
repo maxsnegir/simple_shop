@@ -83,6 +83,9 @@ class Brand(models.Model):
         verbose_name = 'Брэнд'
         verbose_name_plural = 'Брэнды'
 
+    def get_absolute_url(self):
+        return reverse('product_by_brand', args=[self.slug])
+
     def __str__(self):
         return f"{self.name}"
 

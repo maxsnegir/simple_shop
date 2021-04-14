@@ -7,7 +7,6 @@
 
         <div class="row">
 
-            {% show_category request %}
 
 
             <div class="col-lg-9">
@@ -18,8 +17,16 @@
                     <div class="card-body">
                         <h3 class="card-title">{{ product.name }}</h3>
                         <h4>${{ product.price }}</h4>
-                        <h6>{{ product.subcategory.name }}: {{ product.brand.name }}</h6>
+                        <h6>{{ product.subcategory.name }}: <a
+                                href="{{ product.brand.get_absolute_url }}">
+                            {{ product.brand.name }}</a>
+                        </h6>
                         <h6>Цвет: {{ product.color.name }}</h6>
+                        <h6>Наличе: {% if product.availability %}
+                            Есть {% else %}Нет
+
+                        {% endif %}в наличии</h6>
+
                         <p class="card-text">{{ product.description }}</p>
 
                         <form action="{% url 'cart:cart_add' product.id %}"

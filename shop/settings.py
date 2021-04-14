@@ -40,8 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Third-party
     'debug_toolbar',
     'sorl.thumbnail',
+    'crispy_forms',
+
+    # Local
     'products.apps.ProductsConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
@@ -145,3 +150,6 @@ EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
 LOGIN_URL = "/auth/login/"
 LOGIN_REDIRECT_URL = "index"
+
+# django-crispy-forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'  # new

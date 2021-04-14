@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load tags %} }
 
 
 {% block title %}
@@ -10,7 +9,6 @@
     <div class="container">
 
         <div class="row">
-            {% show_category request %}
             <div class="col-lg-9" style="margin-top:56px">
                 {% if cart.get_total_price != 0 %}
                     {% include 'cart/table.html' %}
