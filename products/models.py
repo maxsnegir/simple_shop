@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.urls import reverse
 
@@ -6,7 +7,10 @@ from django.urls import reverse
 class Product(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название товара')
     price = models.DecimalField(max_digits=10, decimal_places=2,
-                                verbose_name='Цена')
+                                verbose_name='Цена',
+                                validators=[MinValueValidator(0,
+                                                              'Цена не может '
+                                                              'быть меньше 0')])
     description = models.TextField(blank=True, verbose_name='Описание товара')
     image = models.ImageField(blank=True, null=True,
                               upload_to='products/%Y/%m/%d',
@@ -40,8 +44,8 @@ class Product(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField('Название категории', max_length=255)
-    slug = models.SlugField('Слаг', max_length=255)
+    name = models.CharField('Название категории', max_length=255, unique=True)
+    slug = models.SlugField('Слаг', max_length=255, unique=True)
 
     def __str__(self):
         return f'{self.name}'
@@ -56,8 +60,8 @@ class Category(models.Model):
 
 
 class Subcategory(models.Model):
-    name = models.CharField('Подкатегория', max_length=255)
-    slug = models.SlugField('Слаг', max_length=255)
+    name = models.CharField('Подкатегория', max_length=255, unique=True)
+    slug = models.SlugField('Слаг', max_length=255, unique=True)
     description = models.TextField('Описание', blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
                                  verbose_name='Категория')
@@ -91,7 +95,7 @@ class Brand(models.Model):
 
 
 class Color(models.Model):
-    name = models.CharField('Цвет', max_length=100)
+    name = models.CharField('Цвет', max_length=100, unique=True)
 
     def save(self, *args, **kwargs):
         self.name = self.name.title()

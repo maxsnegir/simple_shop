@@ -2,11 +2,10 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView, LogoutView
-from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
-from register.forms import RegisterForm, LoginForm
+from register.forms import RegisterForm
 
 
 class Logout(LogoutView):

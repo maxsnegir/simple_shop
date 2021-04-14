@@ -153,3 +153,5 @@ LOGIN_REDIRECT_URL = "index"
 
 # django-crispy-forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'  # new
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
